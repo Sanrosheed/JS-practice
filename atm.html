@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM Operation</title>
+</head>
+<body>
+    <script>
+        alert('Welcome to Sanusi Bank ATM!');
+        
+        const correctPin = '1234'; // Correct PIN
+        
+        function performATMOperation() {
+            const enteredPin = prompt('Please enter your 4-digit PIN:');
+            
+            if (enteredPin === correctPin) {
+                const accountType = prompt(`Choose your account type:\n1. Current\n2. Savings`);
+                
+                if (accountType === '1') {
+                    performTransaction('Current');
+                } else if (accountType === '2') {
+                    performTransaction('Savings');
+                } else {
+                    alert('Invalid account type selection.');
+                    performATMOperation();
+                }
+            } else {
+                alert('Incorrect PIN. Please try again.');
+                performATMOperation();
+            }
+        }
+        
+        function performTransaction(accountType) {
+            const transactionType = prompt(`Choose a transaction type for your ${accountType} account:\n1. Withdrawal\n2. Deposit\n3. Transfer`);
+            
+            if (transactionType === '1') {
+                performWithdrawal(accountType);
+            } else if (transactionType === '2') {
+                performDeposit(accountType);
+            } else if (transactionType === '3') {
+                performTransfer(accountType);
+            } else {
+                alert('Invalid transaction type selection.');
+                performTransaction(accountType);
+            }
+        }
+        
+        function performWithdrawal(accountType) {
+            const amount = parseFloat(prompt(`Enter the withdrawal amount for your ${accountType} account:`));
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Invalid amount. Please enter a valid amount.');
+                performWithdrawal(accountType);
+            } else {
+                alert(`Withdrawal of $${amount} from your ${accountType} account is successful.`);
+                thankYouMessage();
+            }
+        }
+        
+        function performDeposit(accountType) {
+            const amount = parseFloat(prompt(`Enter the deposit amount for your ${accountType} account:`));
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Invalid amount. Please enter a valid amount.');
+                performDeposit(accountType);
+            } else {
+                alert(`Deposit of $${amount} into your ${accountType} account is successful.`);
+                thankYouMessage();
+            }
+        }
+        
+        function performTransfer(accountType) {
+            const amount = parseFloat(prompt(`Enter the transfer amount from your ${accountType} account:`));
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Invalid amount. Please enter a valid amount.');
+                performTransfer(accountType);
+            } else {
+                alert(`Transfer of $${amount} from your ${accountType} account is successful.`);
+                thankYouMessage();
+            }
+        }
+        
+        function thankYouMessage() {
+            alert('Thanks for your patronage!');
+        }
+        
+        performATMOperation();
+    </script>
+</body>
+</html>
